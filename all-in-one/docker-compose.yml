@@ -24,7 +24,7 @@ services:
       - GF_INSTALL_PLUGINS=https://github.com/metrico/grafana-flow/releases/download/v10.0.10/qxip-flow-panel-10.0.10.zip;qxip-flow-panel"
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - 127.0.0.1:3000:3000
     depends_on:
       - clickhouse-server
     logging:
@@ -42,8 +42,8 @@ services:
       - CLICKHOUSE_USER=qryn
       - CLICKHOUSE_PASSWORD=demo
     ports:
-      - 8123:8123
-      - 9000:9000
+      - 127.0.0.1:8123:8123
+      - 127.0.0.1:9000:9000
     healthcheck:
       test: ['CMD', 'wget', '--spider', '-q', '127.0.0.1:8123/ping']
       interval: 1s
@@ -60,7 +60,7 @@ services:
     expose:
       - 3100
     ports:
-      - "3100:3100"
+      - "127.0.0.1:3100:3100"
     environment:
       - CLICKHOUSE_SERVER=clickhouse-server
       - CLICKHOUSE_AUTH=qryn:demo
@@ -127,7 +127,7 @@ services:
     expose:
       - 9093
     ports:
-      - 9093:9093
+      - 127.0.0.1:9093:9093
     logging:
       options:
         max-size: "10m"
@@ -164,10 +164,10 @@ services:
     image: ghcr.io/sipcapture/heplify-server:latest
     container_name: heplify-server
     ports:
-      - "9060:9060"
-      - "9096:9096"
-      - "9060:9060/udp"
-      - "9061:9061/tcp"
+      - "127.0.0.1:9060:9060"
+      - "127.0.0.1:9096:9096"
+      - "127.0.0.1:9060:9060/udp"
+      - "127.0.0.1:9061:9061/tcp"
     command:
       - './heplify-server'
     environment:
